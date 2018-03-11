@@ -18,8 +18,9 @@ class Authentication extends Component {
             </p>
           </div>
         </div>
+        <Registration/>
       </div>
-      )
+      );
   }
 }
 
