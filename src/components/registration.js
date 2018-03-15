@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+// local imports
+import {UserReg} from "../action/registrationAction";
+
 class Registration extends Component {
     constructor(){
         super();
         this.state= {
-            getData:{}
+            first_name:'',
+            last_name:'',
+            email:'',
+            password:'',
         }
     }
     handleOnSubmit(e){
@@ -14,21 +20,33 @@ class Registration extends Component {
             this.refs.last_name.value, 
             this.refs.email.value, 
             this.refs.password.value);
-        this.setState({
-          getData: {
-            first_name: this.refs.first_name.value,
-            last_name: this.refs.last_name.value,
-            email: this.refs.email.value,
-            password: this.refs.password.value
-          }
-        });        e.preventDefault();
+        console.log(e);
+        let values = new FormData();
+        values.set("first_name", this.refs.first_name.value);
+        values.set("last_name", this.refs.last_name.value);
+        values.set("email", this.refs.email.value);
+        values.set("password", this.refs.password.value);
+
+        this.props.UserReg(values);      
+        e.preventDefault();
+        this.state= {
+            first_name:'',
+            last_name:'',
+            email:'',
+            password:''
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+
     }
   render() {
     return (
         <div className="form">
         <ul className="tab-group">
-            <li className="tab active"><a href="#signup">Sign Up</a></li>
-            <li className="tab"><a href="#login">Log In</a></li>
+            <li className="tab active"><a href="signup">Sign Up</a></li>
+            <li className="tab"><a href="login">Log In</a></li>
         </ul>
         <div className="tab-content">>
             <div id="signup">
@@ -37,20 +55,20 @@ class Registration extends Component {
                     <div className="top-row">
                         <div className="field-wrap">
                             <label> First Name<span className="req">*</span></label>
-                            <input type="text" required ref="first_name" /> 
+                            <input type="text" name="first_name" required ref="first_name" onChange={this.handleChange} /> 
                         </div>
                         <div className="field-wrap">
                             <label> Last Name<span className="req">*</span></label>
-                            <input type="text" required ref="last_name" /> 
+                            <input type="text" name="last_name" required ref="last_name" onChange={this.handleChange} /> 
                         </div>
                     </div>
                     <div className="field-wrap">
                         <label> Email Address<span className="req">*</span> </label>
-                        <input type="email" required ref="email" /> 
+                        <input type="email" name="email" required ref="email" onChange={this.handleChange} /> 
                     </div>
                     <div className="field-wrap">
                         <label> Set A Password<span className="req">*</span> </label>
-                        <input type="password" required ref="password"/> 
+                        <input type="password" name="password" required ref="password" onChange={this.handleChange} /> 
                     </div> 
                         {/* <a type="submit" value="submit" className="button button-block">Get Started</a>  */}
                         <button type="submit" value="submit" className="button button-block">Get Started</button> 
@@ -74,4 +92,6 @@ class Registration extends Component {
   }
 }
 
-export default Registration;
+
+export default connect(null, {UserReg})(Registration);
+// export default connect(mapStateToProps, mapDispatchToProps)(Registration);
