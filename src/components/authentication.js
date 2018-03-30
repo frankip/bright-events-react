@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Registration from "./registration";
+import Login from "./login";
 
 class Authentication extends Component {
   render() {
     return (
-    <div className="body">
+      <div className="body">
         <div className="intro">
           <div>
             <h1>
@@ -18,7 +19,7 @@ class Authentication extends Component {
             </p>
           </div>
         </div>
-        <Registration/>
+  
       </div>
       );
   }

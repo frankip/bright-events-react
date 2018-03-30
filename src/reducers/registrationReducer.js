@@ -1,3 +1,5 @@
+// import { USERLOGIN } from "../action/registrationAction";
+
 // import { USEREG } from "../action/registrationAction";
 export const initialState = {
     token: null,
@@ -13,7 +15,12 @@ export default (state = {}, action) => {
                 ...state, 
                 isRegisterd:true
             }
-        
+        case "FAILEDUSEREG":
+            return{
+                ...state,
+                isRegisterd:false
+            }
+            
     default :
         return state;
     }       
