@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {Link, IndexLink  } from "react-router-dom";
+
 
 // local imports
 import {UserReg} from "../action/registrationAction";
@@ -59,12 +61,17 @@ class Registration extends Component {
             </div>
             <div className="form">
                 <ul className="tab-group">
-                    <li className="tab active"><a href="signup">Sign Up</a></li>
-                    <li className="tab"><a href="login">Log In</a></li>
+                    <li className="tab active">
+                        <Link to={'/'}>Signup</Link>
+                    </li>
+                    <li className="tab">
+                        <li><Link to={'/login'}>login</Link></li>
+                    </li>
                 </ul>
-                <div className="tab-content">>
+                <div className="tab-content">
                 <div id="signup">
                         <h3>Sign Up for Free</h3>
+                        
                         <form onSubmit={this.handleOnSubmit.bind(this)}>
                             <div className="top-row">
                                 <div className="field-wrap">
@@ -101,7 +108,7 @@ class Registration extends Component {
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
 
 
     );
